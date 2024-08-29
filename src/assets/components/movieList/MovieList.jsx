@@ -5,7 +5,6 @@ import { apiOptions } from "../../../utils";
 
 const MovieList = ({ searchValue }) => {
   const [resultMovieList, setResultMovieList] = useState([]);
-  console.log("🚀 ~ MovieList ~ resultMovieList:", resultMovieList);
 
   useEffect(() => {
     fetch("https://api.themoviedb.org/3/movie/popular", apiOptions)

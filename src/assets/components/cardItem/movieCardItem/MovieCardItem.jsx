@@ -11,6 +11,7 @@ const MovieCardItem = ({ movie }) => {
       .then((resp) => setResultActorMovieList(resp.cast))
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <>
       <div className="card">
@@ -41,7 +42,17 @@ const MovieCardItem = ({ movie }) => {
               <span className="bold">Lingua:</span> {movie.original_language}
             </div>
             <div>
-              <span className="bold">Voto:</span> {movie.vote_average}
+              <span className="bold">Voto:</span>
+              {[...Array(5)].map((_, i) => (
+                <i
+                  key={i}
+                  className={`fa-star ${
+                    (Math.round(movie.vote_average) * 5) / 10 <= i
+                      ? "fa-regular"
+                      : "fa-solid"
+                  }`}
+                />
+              ))}
             </div>
             <div>
               <span className="bold">Descrizione:</span> {movie.overview}

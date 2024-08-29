@@ -41,7 +41,17 @@ const SerieCardItem = ({ serie }) => {
               <span className="bold">Lingua:</span> {serie.original_language}
             </div>
             <div>
-              <span className="bold">Voto:</span> {serie.vote_average}
+              <span className="bold">Voto:</span>{" "}
+              {[...Array(5)].map((_, i) => (
+                <i
+                  key={i}
+                  className={`fa-star ${
+                    (Math.round(serie.vote_average) * 5) / 10 <= i
+                      ? "fa-regular"
+                      : "fa-solid"
+                  }`}
+                />
+              ))}
             </div>
             <div>
               <span className="bold">Descrizione:</span> {serie.overview}
