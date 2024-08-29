@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import "../CardItem.scss";
+import { apiOptions } from "../../../../utils";
 
 const MovieCardItem = ({ movie }) => {
+  const [resultActorMovieList, setResultActorMovieList] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits`, apiOptions)
+      .then((response) => response.json())
+      .then((resp) => setResultActorMovieList(resp.cast))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <div className="card">
@@ -20,11 +30,11 @@ const MovieCardItem = ({ movie }) => {
               <span className="bold">Titolo:</span> {movie.title}
             </div>
             <div>
-              <span className="bold">Titolo originale:</span>{" "}
+              <span className="bold">Titolo originale:</span>
               {movie.original_title}
             </div>
             <div>
-              <span className="bold">Data di rilascio:</span>{" "}
+              <span className="bold">Data di rilascio:</span>
               {movie.release_date}
             </div>
             <div>
@@ -35,6 +45,12 @@ const MovieCardItem = ({ movie }) => {
             </div>
             <div>
               <span className="bold">Descrizione:</span> {movie.overview}
+            </div>
+            <div>
+              <span className="bold">Attori:</span>
+              {resultActorMovieList.map((actor) => (
+                <div key={actor.id}>{actor.name}</div>
+              ))}
             </div>
           </div>
         </div>

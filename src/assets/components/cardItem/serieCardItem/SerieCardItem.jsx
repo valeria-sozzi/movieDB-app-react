@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
 import "../CardItem.scss";
+import { apiOptions } from "../../../../utils";
 
 const SerieCardItem = ({ serie }) => {
+  const [resultActorSerieList, setResultActorSerieList] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/tv/${serie.id}/credits`, apiOptions)
+      .then((response) => response.json())
+      .then((resp) => setResultActorSerieList(resp.cast))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <div className="card">
@@ -35,6 +45,12 @@ const SerieCardItem = ({ serie }) => {
             </div>
             <div>
               <span className="bold">Descrizione:</span> {serie.overview}
+            </div>
+            <div>
+              <span className="bold">Attori:</span>
+              {resultActorSerieList.map((actor) => (
+                <div key={actor.id}>{actor.name}</div>
+              ))}
             </div>
           </div>
         </div>

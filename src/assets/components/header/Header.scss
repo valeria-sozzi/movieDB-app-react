@@ -1,10 +1,24 @@
 header{
     height: 10vh;
+    display: flex;
+    justify-content: space-between;
     
 
     img{
         width: 200px;
-        height: 60px;
+        height: 1005;
         padding: 20px;
+    }
+
+    .search{
+        padding-top: 50px;
+        padding-right: 100px;
+        
+        input{
+            margin-left: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            padding:4px 15px;
+        }
     }
 }

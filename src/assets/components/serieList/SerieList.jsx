@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SerieCardItem from "../cardItem/serieCardItem/SerieCardItem";
 import { apiOptions } from "../../../utils";
 
-const SerieList = () => {
+const SerieList = ({ searchValue }) => {
   const [resultSerieList, setResultSerieList] = useState([]);
   useEffect(() => {
     fetch("https://api.themoviedb.org/3/tv/popular", apiOptions)
@@ -12,11 +12,14 @@ const SerieList = () => {
   }, []);
   return (
     <div className="card-container">
-      {resultSerieList.map((serie) => (
-        <li key={serie.id}>
-          <SerieCardItem serie={serie} />
-        </li>
-      ))}
+      {resultSerieList.map(
+        (serie) =>
+          serie.name.toLowerCase().includes(searchValue) && (
+            <li key={serie.id}>
+              <SerieCardItem serie={serie} />
+            </li>
+          )
+      )}
     </div>
   );
 };

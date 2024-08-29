@@ -1,8 +1,10 @@
+
 .card{
     height: 300px;
     width: 200px;
     border: 1px solid gray;
     border-radius: 15px;
+    position: relative;
     
 
 
@@ -15,9 +17,10 @@
 
     
     .card-details{
-        position: relative;
-        top: -306px;
+        position: absolute;
+        top:0px;
         left: 0px;
+        bottom: 0px;
         display: none;
         height: 100%;
         overflow: auto;
