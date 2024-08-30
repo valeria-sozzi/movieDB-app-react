@@ -3,7 +3,12 @@ import MovieCardItem from "../cardItem/movieCardItem/MovieCardItem";
 import { useEffect, useState } from "react";
 import { apiOptions } from "../../../utils";
 
-const MovieList = ({ searchValue }) => {
+const MovieList = ({ searchValue, selectedCategory }) => {
+  console.log(
+    "🚀 ~ MovieList ~ selectedCategory:",
+    selectedCategory,
+    +selectedCategory
+  );
   const [resultMovieList, setResultMovieList] = useState([]);
 
   useEffect(() => {
@@ -16,7 +21,9 @@ const MovieList = ({ searchValue }) => {
     <div className="card-container">
       {resultMovieList.map(
         (movie) =>
-          movie.title.toLowerCase().includes(searchValue) && (
+          movie.title.toLowerCase().includes(searchValue) &&
+          (movie.genre_ids.includes(+selectedCategory) ||
+            selectedCategory === "Tutti") && (
             <li key={movie.id}>
               <MovieCardItem movie={movie} />
             </li>
